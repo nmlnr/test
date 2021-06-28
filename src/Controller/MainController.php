@@ -4,9 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\Promotion;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class MainController
+class MainController extends AbstractController
 {
     public function index(): Response
     {
@@ -21,6 +22,9 @@ class MainController
         // Nettoyant pour cuve x3
         // Piquet de clôture x5
 
-        return new Response();
+        return $this->render('front/shopping_cart.html.twig', [
+        ]);
+
+//        return new Response();
     }
 }
