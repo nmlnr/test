@@ -2,29 +2,30 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
-use App\Entity\Promotion;
+use App\Entity\Order;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class MainController
+ * @package App\Controller
+ */
 class MainController extends AbstractController
 {
+    /**
+     * @Route("/", name="home")
+     * @return Response
+     */
     public function index(): Response
     {
-        $product1 = new Product('Cuve à gasoil', 250000, 'Farmitoo');
-        $product2 = new Product('Nettoyant pour cuve', 5000, 'Farmitoo');
-        $product3 = new Product('Piquet de clôture', 1000, 'Gallagher');
+        $em = $this->getDoctrine()->getManager();
 
-        $promotion1 = new Promotion(50000, 8, false);
+        if (!$testOrder = $em->getRepository(Order::class)->findOneBy(['reference' => 'TEST-ORDER'])) {
+            throw new NotFoundHttpException("La commande de test n'a pas été générée en ligne de commandes");
+        }
 
-        // Je passe une commande avec
-        // Cuve à gasoil x1
-        // Nettoyant pour cuve x3
-        // Piquet de clôture x5
-
-        return $this->render('front/shopping_cart.html.twig', [
-        ]);
-
-//        return new Response();
+        return $this->render('front/shopping_cart.html.twig', ['testOrder' => $testOrder]);
     }
 }

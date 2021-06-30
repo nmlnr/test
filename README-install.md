@@ -16,13 +16,14 @@ PHP >= 7.2.5
 ## Vhost XAMPP - Windows - w/ multiple PHP versions installed
 
 ```apacheconfig
-#
-# SELLERMANIA - Technical test
+# 
+# FARMITOO - TEST
 #
 <VirtualHost *:80>
-	ServerName sellermania.local
-	DocumentRoot "D:\xampp\htdocs\sellermania\technical_test\public"
-	<Directory "D:\xampp\htdocs\sellermania\technical_test\public">
+	ServerName www.farmitoo.test
+	ServerAlias farmitoo.test
+	DocumentRoot "path\to\root\public"
+	<Directory "path\to\root\public">
         AllowOverride All
 		Options +FollowSymLinks -Indexes 
 		Order Allow,Deny
@@ -50,4 +51,5 @@ At the root of the project, run
 ```
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
 ```

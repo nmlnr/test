@@ -6,6 +6,7 @@ use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OrderBy;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
@@ -24,6 +25,11 @@ class Order
      * @ORM\OneToMany(targetEntity=Item::class, mappedBy="itemOrder")
      */
     private $items;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $reference;
 
     public function __construct()
     {
@@ -61,6 +67,18 @@ class Order
                 $item->setItemOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
 
         return $this;
     }

@@ -1,0 +1,23 @@
+title: Farmitoo - Test technique
+sub_title: Votre panier
+table:
+  headers:
+    product: Produit
+    price: Prix
+    quantity: Quantité
+    remove: Supprimer
+coupon:
+  title: Code du coupon
+  help: Si vous avez un code promo, veuillez le saisir dans la case ci-dessous
+  apply: Appliquer le coupon
+instructions_seller:
+  title: Instructions pour le vendeur
+  help: Si vous avez des informations pour le vendeur, vous pouvez les laisser dans la case ci-dessous.
+order_summary:
+  title: Résumé de la commande
+  help: Les frais d'expédition et les frais supplémentaires sont calculés en fonction des valeurs que vous avez saisies
+  subtotal: Sous-total
+  shipping: Livraison
+  vat: T.V.A.
+  total: Total
+  checkout: Procéder au paiement
