@@ -3,7 +3,7 @@ sub_title: Votre panier
 table:
   headers:
     product: Produit
-    price: Prix
+    price: Prix unitaire
     quantity: Quantité
     remove: Supprimer
 coupon:
