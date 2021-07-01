@@ -21,3 +21,4 @@ order_summary:
   vat: T.V.A.
   total: Total
   checkout: Procéder au paiement
+  confirm_deletion: Confirmer la suppression ?

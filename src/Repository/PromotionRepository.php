@@ -7,9 +7,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class PromotionRepository
- * @package App\Repository
- *
  * @method Promotion|null find($id, $lockMode = null, $lockVersion = null)
  * @method Promotion|null findOneBy(array $criteria, array $orderBy = null)
  * @method Promotion[]    findAll()
@@ -17,12 +14,37 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PromotionRepository extends ServiceEntityRepository
 {
-    /**
-     * PromotionRepository constructor.
-     * @param ManagerRegistry $registry
-     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Promotion::class);
     }
+
+    // /**
+    //  * @return Promotion[] Returns an array of Promotion objects
+    //  */
+    /*
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
+
+    /*
+    public function findOneBySomeField($value): ?Promotion
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    */
 }

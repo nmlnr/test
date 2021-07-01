@@ -6,9 +6,6 @@ use App\Repository\PromotionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Promotion
- * @package App\Entity
- *
  * @ORM\Entity(repositoryClass=PromotionRepository::class)
  */
 class Promotion
@@ -21,33 +18,58 @@ class Promotion
     private $id;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
-    private $minAmount;
+    private $amount;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $reduction;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $freeDelivery;
+    private $isDeliveryFree;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbUses;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbProducts;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $startDate;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $endDate;
+
+    /**
+     * @ORM\Column(type="EnumPromotionType")
+     */
+    private $type;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMinAmount(): ?float
+    public function getAmount(): ?float
     {
-        return $this->minAmount;
+        return $this->amount;
     }
 
-    public function setMinAmount(float $minAmount): self
+    public function setAmount(?float $amount): self
     {
-        $this->minAmount = $minAmount;
+        $this->amount = $amount;
 
         return $this;
     }
@@ -57,21 +79,81 @@ class Promotion
         return $this->reduction;
     }
 
-    public function setReduction(float $reduction): self
+    public function setReduction(?float $reduction): self
     {
         $this->reduction = $reduction;
 
         return $this;
     }
 
-    public function getFreeDelivery(): ?bool
+    public function getIsDeliveryFree(): ?bool
     {
-        return $this->freeDelivery;
+        return $this->isDeliveryFree;
     }
 
-    public function setFreeDelivery(bool $freeDelivery): self
+    public function setIsDeliveryFree(?bool $isDeliveryFree): self
     {
-        $this->freeDelivery = $freeDelivery;
+        $this->isDeliveryFree = $isDeliveryFree;
+
+        return $this;
+    }
+
+    public function getNbUses(): ?int
+    {
+        return $this->nbUses;
+    }
+
+    public function setNbUses(?int $nbUses): self
+    {
+        $this->nbUses = $nbUses;
+
+        return $this;
+    }
+
+    public function getNbProducts(): ?int
+    {
+        return $this->nbProducts;
+    }
+
+    public function setNbProducts(?int $nbProducts): self
+    {
+        $this->nbProducts = $nbProducts;
+
+        return $this;
+    }
+
+    public function getStartDate(): ?\DateTimeInterface
+    {
+        return $this->startDate;
+    }
+
+    public function setStartDate(?\DateTimeInterface $startDate): self
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(?\DateTimeInterface $endDate): self
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

@@ -1,0 +1,36 @@
+brand:
+  list:
+    title: Liste des marques
+  detail:
+    title: Marque {brand}
+  fields:
+    id: Identifiant
+    name: Nom
+    vat: T.V.A.
+promotion:
+  list:
+    title: Liste des promotions
+  detail:
+    title: Promotion {promotion}
+  fields:
+    id: Identifiant
+    amount: Montant minimum
+    reduction: Réduction (%)
+    is_delivery_free: Frais de port gratuits
+    nb_uses: Nombre d'utilisation
+    nb_products: Nombre de produits
+    start_date: Date de départ
+    end_date: Date de fin
+    type: Type de promotion
+global:
+  create_new: Ajouter un élément
+  back_to_list: Retour à la liste
+  actions: Actions
+  show: Afficher
+  edit: Modifier
+  delete: Supprimer
+  created_at: Date de création
+  updated_at: Date de dernière modification
+  confirm_delete: Êtes-vous sûr de vouloir supprimer cet élément ?
+  update: Mettre à jour
+  no_record_found: Aucune donnée à afficher

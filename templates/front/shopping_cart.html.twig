@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'cart' %}
 
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
 {% block body %}
     <div class="px-4 px-lg-0">
         <!-- For demo purpose -->
         <div class="container text-white py-5 text-center">
-            <h1 class="display-4">
+            <h1 class="display-4 animate__animated animate__flipInX">
                 {{ 'title'|trans }}
             </h1>
             <p class="lead mb-0">{{ 'sub_title'|trans }}</p>
@@ -72,9 +74,13 @@
                                                 {{ item.product.price|number_format(2, '.', ' ') }}€
                                             </strong>
                                         </td>
-                                        <td class="border-0 align-middle"><strong>3</strong></td>
-                                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i
-                                                        class="fa fa-trash"></i></a></td>
+                                        <td class="border-0 align-middle"><strong>{{ item.quantity }}</strong></td>
+                                        <td class="border-0 align-middle">
+                                            <a href="#" class="text-dark js-delete-item"
+                                               data-message="{{ 'order_summary.confirm_deletion'|trans }}"
+                                               data-route="{{ path('item_ajax_delete', {'id':item.id}) }}">
+                                                <i class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
@@ -97,7 +103,7 @@
                                 <input type="text" placeholder="{{ 'coupon.apply'|trans }}" aria-describedby="button-addon3" readonly
                                        class="form-control border-0">
                                 <div class="input-group-append border-0">
-                                    <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i
+                                    <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill disabled"><i
                                                 class="fa fa-gift mr-2"></i>
                                         {{ 'coupon.apply'|trans }}
                                     </button>
@@ -119,30 +125,30 @@
                             {{ 'order_summary.title'|trans }}
                         </div>
                         <div class="p-4">
-                            <p class="font-italic mb-4">S
+                            <p class="font-italic mb-4">
                                 {{ 'order_summary.help'|trans }}</p>
                             <ul class="list-unstyled mb-4">
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                             class="text-muted">
                                         {{ 'order_summary.subtotal'|trans }}
-                                    </strong><strong>$390.00</strong></li>
+                                    </strong><strong>{{ orderSummaryData['subTotalNoVat']|number_format(2, '.', ' ') }}€</strong></li>
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                             class="text-muted">
                                         {{ 'order_summary.shipping'|trans }}
-                                    </strong><strong>$10.00</strong></li>
+                                    </strong><strong>{{ orderSummaryData['deliveryFees']|number_format(2, '.', ' ') }}€</strong></li>
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                             class="text-muted">
                                         {{ 'order_summary.vat'|trans }}
-                                    </strong><strong>$0.00</strong></li>
+                                    </strong><strong>{{ orderSummaryData['vat']|number_format(2, '.', ' ') }}€</strong></li>
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                             class="text-muted">
                                         {{ 'order_summary.total'|trans }}
                                     </strong>
-                                    <h5 class="font-weight-bold">$400.00</h5>
+                                    <h5 class="font-weight-bold">{{ orderSummaryData['totalWithVat']|number_format(2, '.', ' ') }}€</h5>
                                 </li>
                             </ul>
-                            <a href="#" class="btn btn-dark rounded-pill py-2 btn-block">
-                                {{ 'order_summary.checkout'|trans }}
+                            <a href="#" class="btn btn-dark rounded-pill py-2 btn-block hvr-icon-wobble-horizontal">
+                                {{ 'order_summary.checkout'|trans }} <i class="fa fa-arrow-right hvr-icon"></i>
                             </a>
                         </div>
                     </div>
