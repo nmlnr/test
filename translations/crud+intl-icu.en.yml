@@ -19,7 +19,7 @@ promotion:
     is_delivery_free: Frais de port gratuits
     nb_uses: Nombre d'utilisation
     nb_products: Nombre de produits
-    start_date: Date de départ
+    start_date: Date de début
     end_date: Date de fin
     type: Type de promotion
 global:

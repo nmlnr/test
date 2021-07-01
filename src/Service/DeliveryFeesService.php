@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Entity\Item;
 use App\Entity\Order;
 
 /**
@@ -12,30 +11,45 @@ use App\Entity\Order;
 class DeliveryFeesService
 {
     /**
-     * Return cart data to display
      * @param Order $order
-     * @return array
+     * @return float|int
      */
-    public function getSummaryData(Order $order): array
+    public function getDeliveryFeesForOrder(Order $order)
     {
-        $result = [
-            'subTotalNoVat' => 0,
-            'promotion' => 0,
-            'deliveryFees' => 0,
-            'totalWithoutVat' => 0,
-            'vat' => 0,
-            'totalWithVat' => 0,
-        ];
+        $countProductsByBrand = [];
+        $feesForOrder = 0;
 
-        foreach($order->getItems() as $item) {
-            /** @var Item $item */
-            $subTotalCurrentItem = $item->getProduct()->getPrice() * $item->getQuantity();
-            $result['subTotalNoVat'] += $subTotalCurrentItem;
-            $result['vat'] += $subTotalCurrentItem * $item->getProduct()->getBrand()->getVat() / 100;
+        foreach ($order->getItems() as $item) {
+
+            if (!isset($countProductsByBrand[$item->getProduct()->getBrand()->getName()])) {
+                $countProductsByBrand[$item->getProduct()->getBrand()->getName()] = 0;
+            }
+            $countProductsByBrand[$item->getProduct()->getBrand()->getName()] += $item->getQuantity();
         }
 
-        $result['totalWithVat'] = $result['subTotalNoVat'] + $result['vat'];
+        foreach ($countProductsByBrand as $brandName => $countProducts) {
+            $feesForOrder += $this->calculateFees($brandName, $countProducts);
+        }
 
-        return $result;
+        return $feesForOrder;
+    }
+
+    /**
+     * @param string $brandName
+     * @param int $countProducts
+     * @return float|int
+     */
+    public function calculateFees(string $brandName, int $countProducts)
+    {
+        switch (strtolower($brandName)) {
+            case 'farmitoo':
+                $quotient = intdiv($countProducts, 3);
+                $rest = $countProducts % 3;
+                return $quotient * 20 + ($rest ? $rest * 20 : 0);
+            case 'gallagher':
+                return 15;
+            default:
+                return 0;
+        }
     }
 }

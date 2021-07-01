@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class PromotionController
  * @package App\Controller
  *
- *  @Route("/promotion")
+ *  @Route("/admin/promotion")
  */
 class PromotionController extends AbstractController
 {

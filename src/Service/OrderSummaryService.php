@@ -14,9 +14,11 @@ class OrderSummaryService
     /**
      * Return cart data to display
      * @param Order $order
+     * @param VatService $vat
+     * @param DeliveryFeesService $deliveryFees
      * @return array
      */
-    public function getSummaryData(Order $order): array
+    public function getSummaryData(Order $order, VatService $vat, DeliveryFeesService $deliveryFees): array
     {
         $result = [
             'subTotalNoVat' => 0,
@@ -30,10 +32,14 @@ class OrderSummaryService
         foreach($order->getItems() as $item) {
             /** @var Item $item */
             $subTotalCurrentItem = $item->getProduct()->getPrice() * $item->getQuantity();
+
             $result['subTotalNoVat'] += $subTotalCurrentItem;
-            $result['vat'] += $subTotalCurrentItem * $item->getProduct()->getBrand()->getVat() / 100;
+            $result['vat'] += $subTotalCurrentItem * $vat->getVatForProduct($item->getProduct()) / 100;
         }
 
+        $result['promotion'] = 0;
+        $result['deliveryFees'] = $deliveryFees->getDeliveryFeesForOrder($order);
+        $result['totalWithoutVat'] = $result['subTotalNoVat'] + $result['promotion'] + $result['deliveryFees'];
         $result['totalWithVat'] = $result['subTotalNoVat'] + $result['vat'];
 
         return $result;

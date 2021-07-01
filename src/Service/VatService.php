@@ -2,8 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\Item;
-use App\Entity\Order;
+use App\Entity\Product;
 
 /**
  * Class VatService
@@ -12,30 +11,29 @@ use App\Entity\Order;
 class VatService
 {
     /**
-     * Return cart data to display
-     * @param Order $order
-     * @return array
+     * Get vat for product, default is the brand vat
+     * @param Product $product
+     * @param string $country
+     * @return float|int|null
      */
-    public function getSummaryData(Order $order): array
+    public function getVatForProduct(Product $product, string $country = '')
     {
-        $result = [
-            'subTotalNoVat' => 0,
-            'promotion' => 0,
-            'deliveryFees' => 0,
-            'totalWithoutVat' => 0,
-            'vat' => 0,
-            'totalWithVat' => 0,
-        ];
-
-        foreach($order->getItems() as $item) {
-            /** @var Item $item */
-            $subTotalCurrentItem = $item->getProduct()->getPrice() * $item->getQuantity();
-            $result['subTotalNoVat'] += $subTotalCurrentItem;
-            $result['vat'] += $subTotalCurrentItem * $item->getProduct()->getBrand()->getVat() / 100;
+        switch ($country) {
+            case 'be' :
+            case 'es' :
+            case 'nl' :
+                return 21;
+            case 'fr' :
+                return 20;
+            case 'de' :
+                return 19;
+            case 'gr' :
+            case 'pt':
+                return 23;
+            case 'it' :
+                return 22;
+            default:
+                return $product->getBrand()->getVat();
         }
-
-        $result['totalWithVat'] = $result['subTotalNoVat'] + $result['vat'];
-
-        return $result;
     }
 }
