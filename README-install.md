@@ -9,6 +9,13 @@ Author : Nicolas MOLINARO
 - Node.js installed
 - PHP >= 7.2.5, test use PHP 7.4.12
 ```
+## Pages
+```
+- Panier => http://farmitoo.test/
+- CRUD Marque => http://farmitoo.test/admin/brand/
+- CRUD Promotion => http://farmitoo.test/admin/promotion/
+```
+
 ## Hosts file
 ```
 # FARMITOO - TEST
