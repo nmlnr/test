@@ -45,7 +45,7 @@ class DeliveryFeesService
             case 'farmitoo':
                 $quotient = intdiv($countProducts, 3);
                 $rest = $countProducts % 3;
-                return $quotient * 20 + ($rest ? $rest * 20 : 0);
+                return $quotient * 20 + ($rest ? 20 : 0);
             case 'gallagher':
                 return 15;
             default:

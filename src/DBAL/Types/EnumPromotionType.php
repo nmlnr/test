@@ -17,22 +17,14 @@ class EnumPromotionType extends AbstractEnumType
     /** @var string PRODUCTS */
     public const PRODUCTS = 'products';
 
-    /** @var string DATE */
-    public const DATE = 'date';
-
     /** @var string USES */
     public const USES = 'uses';
-
-    /** @var string FOOTBALL */
-    public const FOOTBALL = 'football'; // not serious
 
     /** @var string[] $choices */
     protected static $choices = [
         self::AMOUNT => self::AMOUNT,
         self::PRODUCTS => self::PRODUCTS,
-        self::DATE => self::DATE,
         self::USES => self::USES,
-        self::FOOTBALL => self::FOOTBALL,
     ];
 
     /**

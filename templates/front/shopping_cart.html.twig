@@ -128,23 +128,47 @@
                             <p class="font-italic mb-4">
                                 {{ 'order_summary.help'|trans }}</p>
                             <ul class="list-unstyled mb-4">
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                                            class="text-muted">
+                                <li class="d-flex justify-content-between py-3 border-bottom">
+                                    <strong class="text-muted">
                                         {{ 'order_summary.subtotal'|trans }}
-                                    </strong><strong>{{ orderSummaryData['subTotalNoVat']|number_format(2, '.', ' ') }}€</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                                            class="text-muted">
+                                    </strong>
+                                    <strong>
+                                        {{ orderSummaryData['subTotalNoVat']|number_format(2, '.', ' ') }}€
+                                    </strong>
+                                </li>
+                                {% if(orderSummaryData['reduction'] > 0) %}
+                                    <li class="d-flex justify-content-between py-3 border-bottom">
+                                        <strong class="text-muted">
+                                            {{ 'order_summary.reduction'|trans }}
+                                        </strong>
+                                        <strong class="text-danger">
+                                            - {{ orderSummaryData['reduction']|number_format(2, '.', ' ') }}€
+                                        </strong>
+                                    </li>
+                                {% endif %}
+                                <li class="d-flex justify-content-between py-3 border-bottom">
+                                    <strong class="text-muted">
                                         {{ 'order_summary.shipping'|trans }}
-                                    </strong><strong>{{ orderSummaryData['deliveryFees']|number_format(2, '.', ' ') }}€</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                                            class="text-muted">
+                                    </strong>
+                                    <strong>
+                                        {{ orderSummaryData['deliveryFees']|number_format(2, '.', ' ') }}€
+                                    </strong>
+                                </li>
+                                <li class="d-flex justify-content-between py-3 border-bottom">
+                                    <strong class="text-muted">
                                         {{ 'order_summary.vat'|trans }}
-                                    </strong><strong>{{ orderSummaryData['vat']|number_format(2, '.', ' ') }}€</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                                            class="text-muted">
+                                    </strong>
+                                    <strong>
+                                        {{ orderSummaryData['vat']|number_format(2, '.', ' ') }}€
+                                    </strong>
+                                </li>
+                                <li class="d-flex justify-content-between py-3 border-bottom">
+                                    <strong class="text-muted">
                                         {{ 'order_summary.total'|trans }}
                                     </strong>
-                                    <h5 class="font-weight-bold">{{ orderSummaryData['totalWithVat']|number_format(2, '.', ' ') }}€</h5>
+                                    <h5 class="font-weight-bold">
+                                        {{ orderSummaryData['totalWithVat']|number_format(2, '.', ' ') }}€
+                                    </h5>
                                 </li>
                             </ul>
                             <a href="#" class="btn btn-dark rounded-pill py-2 btn-block hvr-icon-wobble-horizontal">

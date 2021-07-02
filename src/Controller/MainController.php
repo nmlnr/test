@@ -20,11 +20,9 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="home")
      * @param OrderSummaryService $orderSummary
-     * @param VatService $vat
-     * @param DeliveryFeesService $deliveryFees
      * @return Response
      */
-    public function index(OrderSummaryService $orderSummary, VatService $vat, DeliveryFeesService $deliveryFees): Response
+    public function index(OrderSummaryService $orderSummary): Response
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -34,7 +32,7 @@ class MainController extends AbstractController
 
         return $this->render('front/shopping_cart.html.twig', [
             'testOrder' => $testOrder,
-            'orderSummaryData' => $orderSummary->getSummaryData($testOrder, $vat, $deliveryFees),
+            'orderSummaryData' => $orderSummary->getSummaryData($testOrder),
         ]);
     }
 }
