@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'crud' %}
+
+{% block title %}{{ 'brand.list.title'|trans }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'brand.list.title'|trans }}</h1>
+
+    <table class="table table-light table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>{{ 'brand.fields.id'|trans }}</th>
+            <th>{{ 'brand.fields.name'|trans }}</th>
+            <th>{{ 'brand.fields.vat'|trans }}</th>
+            <th>{{ 'global.created_at'|trans }}</th>
+            <th>{{ 'global.updated_at'|trans }}</th>
+            <th>{{ 'global.actions'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for brand in brands %}
+            <tr>
+                <td>{{ brand.id }}</td>
+                <td>{{ brand.name }}</td>
+                <td>{{ brand.vat }}</td>
+                <td>{{ brand.createdAt ? brand.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ brand.updatedAt ? brand.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('brand_show', {'id': brand.id}) }}">{{ 'global.show'|trans }}</a>
+                    <a href="{{ path('brand_edit', {'id': brand.id}) }}">{{ 'global.edit'|trans }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="text-danger">{{ 'global.no_records_found'|trans }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('brand_new') }}" class="btn btn-primary">{{ 'global.create_new'|trans }}</a>
+{% endblock %}

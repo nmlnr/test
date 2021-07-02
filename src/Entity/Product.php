@@ -2,41 +2,100 @@
 
 namespace App\Entity;
 
+use App\Repository\ProductRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Class Product
+ * @package App\Entity
+ *
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
+ */
 class Product
 {
     /**
-     * @var string
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    protected $title;
+    private $id;
 
     /**
-     * @var int
+     * @ORM\Column(type="string", length=255)
      */
-    protected $price;
+    private $title;
 
     /**
-     * @var string
+     * @ORM\Column(type="float")
      */
-    protected $brand;
+    private $price;
 
     /**
-     * @param string $title
-     * @param int $price
-     * @param string $brand
+     * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
      */
-    public function __construct(string $title, int $price, string $brand)
+    private $brand;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Item::class, mappedBy="product", cascade={"persist", "remove"})
+     */
+    private $item;
+
+    public function getId(): ?int
     {
-        $this->title = $title;
-        $this->price = $price;
-        $this->brand = $brand;
+        return $this->id;
     }
 
-
-    /**
-     * @return string
-     */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?Brand $brand): self
+    {
+        $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function getItem(): ?Item
+    {
+        return $this->item;
+    }
+
+    public function setItem(Item $item): self
+    {
+        // set the owning side of the relation if necessary
+        if ($item->getProduct() !== $this) {
+            $item->setProduct($this);
+        }
+
+        $this->item = $item;
+
+        return $this;
     }
 }

@@ -1,0 +1,6 @@
+{% trans_default_domain 'crud' %}
+
+<form method="post" action="{{ path('brand_delete', {'id': brand.id}) }}" onsubmit="return confirm('{{ 'global.confirm_delete'|trans }}');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ brand.id) }}">
+    <button class="btn btn-danger">{{ 'global.delete'|trans }}</button>
+</form>

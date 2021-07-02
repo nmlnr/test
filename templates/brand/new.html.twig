@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'crud' %}
+
+{% block title %}{{ 'global.create_new'|trans }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'global.create_new'|trans }}</h1>
+
+    {{ include('brand/_form.html.twig', {'button_label': 'global.create_new'|trans }) }}
+
+    <a href="{{ path('brand_index') }}" class="btn btn-warning">{{ 'global.back_to_list'|trans }}</a>
+{% endblock %}

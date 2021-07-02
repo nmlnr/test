@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'crud' %}
+
+{% block title %}{{ 'promotion.detail.title'|trans({'promotion':promotion.id}) }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'promotion.detail.title'|trans({'promotion':promotion.id}) }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>{{ 'promotion.fields.id'|trans }}</th>
+                <td>{{ promotion.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'promotion.fields.amount'|trans }}</th>
+                <td>{{ promotion.amount }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'promotion.fields.reduction'|trans }}</th>
+                <td>{{ promotion.reduction }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'promotion.fields.is_delivery_free'|trans }}</th>
+                <td>{{ promotion.isDeliveryFree ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'promotion.fields.nb_uses'|trans }}</th>
+                <td>{{ promotion.nbUses }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'promotion.fields.nb_products'|trans }}</th>
+                <td>{{ promotion.nbProducts }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'promotion.fields.start_date'|trans }}</th>
+                <td>{{ promotion.startDate ? promotion.startDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'promotion.fields.end_date'|trans }}</th>
+                <td>{{ promotion.endDate ? promotion.endDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'promotion.fields.type'|trans }}</th>
+                <td>{{ ('promotion.' ~ promotion.type)|trans({}, 'enum') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('promotion_index') }}" class="btn btn-warning">{{ 'global.back_to_list'|trans }}</a>
+
+    <a href="{{ path('promotion_edit', {'id': promotion.id}) }}" class="btn btn-info">{{ 'global.edit'|trans }}</a>
+
+    {{ include('promotion/_delete_form.html.twig') }}
+{% endblock %}

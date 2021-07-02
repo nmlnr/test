@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'crud' %}
+
+{% block title %}{{ 'brand.detail.title'|trans({'brand':brand.name}) }}{% endblock %}
+
+{% block body %}
+
+    <h1>{{ 'brand.detail.title'|trans({'brand':brand.name}) }}</h1>
+
+    <table class="table table-light table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>{{ 'brand.fields.id'|trans }}</th>
+                <td>{{ brand.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'brand.fields.name'|trans }}</th>
+                <td>{{ brand.name }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'brand.fields.vat'|trans }}</th>
+                <td>{{ brand.vat }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'global.created_at'|trans }}</th>
+                <td>{{ brand.createdAt ? brand.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'global.updated_at'|trans }}</th>
+                <td>{{ brand.updatedAt ? brand.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('brand_index') }}" class="btn btn-warning">{{ 'global.back_to_list'|trans }}</a>
+
+    <a href="{{ path('brand_edit', {'id': brand.id}) }}" class="btn btn-info">{{ 'global.edit'|trans }}</a>
+
+    {{ include('brand/_delete_form.html.twig') }}
+{% endblock %}
