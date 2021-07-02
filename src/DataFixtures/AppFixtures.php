@@ -81,9 +81,9 @@ class AppFixtures extends Fixture
 
         // promotion
         $promotion1 = new Promotion();
-        $promotion1->setMinAmount(50000);
+        $promotion1->setAmount(50000);
         $promotion1->setReduction(8);
-        $promotion1->setFreeDelivery(false);
+        $promotion1->setIsDeliveryFree(false);
 
         $manager->persist($promotion1);
 
