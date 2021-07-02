@@ -4,9 +4,10 @@ Farmitoo - Technical test 2021
 
 Author : Nicolas MOLINARO
 
-## PHP version
+## Pré-requis
 ```
-PHP >= 7.2.5
+- Node.js installed
+- PHP >= 7.2.5, test use PHP 7.4.12
 ```
 ## Hosts file
 ```
@@ -38,6 +39,12 @@ PHP >= 7.2.5
     </FilesMatch>
 </VirtualHost>
 ```
+## .env.local (adapt if necessary)
+```
+###> doctrine/doctrine-bundle ###
+DATABASE_URL="mysql://root:@localhost/farmitoo-test?serverVersion=mariadb-10.4.8"
+###< doctrine/doctrine-bundle ###
+```
 
 ## Assets (CSS & JS)
 At the root of the project, run
@@ -52,4 +59,10 @@ At the root of the project, run
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
+```
+
+## Tests (Windows)
+At the root of the project, run
+```
+.\vendor\bin\phpunit.bat tests\Unit\
 ```
