@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\DBAL\Types\EnumPromotionType;
 use App\Entity\Brand;
 use App\Entity\Item;
 use App\Entity\Order;
@@ -84,6 +85,7 @@ class AppFixtures extends Fixture
         $promotion1->setAmount(50000);
         $promotion1->setReduction(8);
         $promotion1->setIsDeliveryFree(false);
+        $promotion1->setType(EnumPromotionType::AMOUNT);
 
         $manager->persist($promotion1);
 
