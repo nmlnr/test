@@ -8,6 +8,7 @@ Author : Nicolas MOLINARO
 ```
 - Node.js installed
 - PHP >= 7.2.5, test use PHP 7.4.12
+- NPM >= 7.6.2
 ```
 ## Pages
 ```
